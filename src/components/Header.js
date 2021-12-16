@@ -5,26 +5,29 @@ import {
     Text,
     Button,
     Box,
+    IconButton,
+    SearchIcon,
     Menu,
     MenuButton,
     MenuList,
-    MenuItem
+    MenuItem,
+    Input
 } from "@chakra-ui/react";
-import { FaChevronDown } from "react-icons/fa";
+import { FaChevronDown, FaSearch } from "react-icons/fa";
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 import { HashLink } from 'react-router-hash-link';
 
 function Header() {
     return(
     <Flex
-        w='100%'
-        align='flex-start'
-        p='8'
+        flexDir={['column', 'column', 'row', 'row']}
+        align='center'
+        h='150px'
+        p='5'
         bg='#061F4A'>
-        <ColorModeSwitcher mt='-5' mr='3' ml='-5'/>
         <Flex>
             <HashLink smooth to="/home">
-                <Heading color='#DD361C'>
+                <Heading color='#E59892'>
                     TORI
                 </Heading>
             </HashLink>
@@ -38,7 +41,6 @@ function Header() {
                     </Button>
                 </HashLink>
             </Flex>
-
             <Flex ml='2'>
                 <Menu>
                     <MenuButton as={Button} rightIcon={<FaChevronDown />}>
@@ -50,8 +52,8 @@ function Header() {
                     </MenuList>
                 </Menu>
             </Flex>
+            <ColorModeSwitcher />
         </Flex>
-        {/* Search bar to here */}
     </Flex>
     )
 }

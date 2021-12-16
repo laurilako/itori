@@ -1,7 +1,7 @@
 import React from 'react'
 
-function Listings(){
+function Listing(){
 
 }
 
-return Listings
+return Listing

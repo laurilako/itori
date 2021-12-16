@@ -12,8 +12,9 @@ const breakpoints = createBreakpoints({
 const styles = {
   global: props => ({
     body: {
-      color: mode('#black', '#FCFFFD')(props),
-      bg: mode('#EEEEEE', '#020300')(props),
+      // color: mode('black', '#FCFFFD')(props),
+      color: mode('black', '#FCFFFD')(props),
+      bg: mode('#EEEEEE', '#06082a')(props),
     },
   }),
 };

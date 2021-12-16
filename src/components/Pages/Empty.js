@@ -9,7 +9,7 @@ function Empty(){
                 Empty site...
             </Heading>
             <HashLink smooth to="/home">
-                <Button mt='5' color='white'>
+                <Button mt='5'>
                     RETURN TO TORI
                 </Button>
             </HashLink>  

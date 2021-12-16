@@ -16,13 +16,16 @@ function Header() {
         bg='#061F4A'>
         <Flex align={"center"}>
             <ColorModeSwitcher mr='8'/>
-
             <HashLink smooth to="/home">
                 <Heading color='#DD361C'>
                     TORI
                 </Heading>
             </HashLink>    
         </Flex>
+
+        {/* Search bar to here */}
+        
+        {/* User info to here */}
     </Flex>
     )
 }

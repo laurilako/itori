@@ -13,7 +13,7 @@ const styles = {
   global: props => ({
     body: {
       color: mode('#EEEEEE', '#FCFFFD')(props),
-      bg: mode('#EEEEEE', '#020300')(props),
+      bg: mode('#EEEEEE', '#05051c')(props),
     },
   }),
 };

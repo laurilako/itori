@@ -4,6 +4,7 @@ import {
     Heading
 } from "@chakra-ui/react";
 import { ColorModeSwitcher } from './ColorModeSwitcher';
+import { HashLink } from 'react-router-hash-link';
 
 function Header() {
     return(
@@ -15,9 +16,12 @@ function Header() {
         bg='#061F4A'>
         <Flex align={"center"}>
             <ColorModeSwitcher mr='8'/>
-            <Heading color='#DD361C'>
-                Tori
-            </Heading>
+
+            <HashLink smooth to="/home">
+                <Heading color='#DD361C'>
+                    TORI
+                </Heading>
+            </HashLink>    
         </Flex>
     </Flex>
     )

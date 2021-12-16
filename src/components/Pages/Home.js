@@ -11,7 +11,7 @@ function Home() {
         <>
             <Header />
             <Flex flexDir='column' align={"center"} p='50' w='100%' bg='#E59892'>
-                <Heading as='h1' color='black'>
+                <Heading as='h1' color='current'>
                     Welcome to TORI!
                 </Heading>
                 <Heading as='h2'>

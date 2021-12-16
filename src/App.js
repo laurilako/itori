@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   ChakraProvider,
-  Flex
 } from '@chakra-ui/react';
 import theme from './config/theme';
 import Empty from './components/Pages/Empty';
@@ -13,9 +12,9 @@ function App() {
   return (
     <ChakraProvider theme={theme}>
       <Routes>
-        <Route exact path='/' element={<Empty />} />
-        <Route exact path='/login' element={<Login />} />
         <Route exact path='/home' element={<Home />} />
+        <Route exact path='/login' element={<Login />} />
+        <Route exact path='/' element={<Empty />} />
       </Routes>
     </ChakraProvider>
   );

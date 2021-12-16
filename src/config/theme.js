@@ -12,8 +12,8 @@ const breakpoints = createBreakpoints({
 const styles = {
   global: props => ({
     body: {
-      color: mode('#EEEEEE', '#FCFFFD')(props),
-      bg: mode('#EEEEEE', '#05051c')(props),
+      color: mode('#black', '#FCFFFD')(props),
+      bg: mode('#EEEEEE', '#020300')(props),
     },
   }),
 };
@@ -40,7 +40,7 @@ const components = {
         boxShadow: '0 0 2px 2px #046b99',
       },
       outline: props => ({
-        borderColor: props.colorMode === 'dark' ? '#5299D3' : '',
+        borderColor: props.colorMode === 'dark' ? '#5299D3' : '#5299D3',
       }),
     },
   },

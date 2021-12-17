@@ -11,6 +11,7 @@ import {
 } from '@chakra-ui/react'
 import ListingCard from '../ListingCard'
 import { HashLink } from 'react-router-hash-link'
+import listings from '../../data/listings'
 
 function Mylistings(props){
     return(
@@ -20,7 +21,7 @@ function Mylistings(props){
             <Flex p='2' align='center' justify='center' flexDir={'column'}>
                 <Flex p='6' >
                     <HashLink smooth to='/new'>
-                        <Button variant={'solid'} bg='#E59892'>CREATE NEW</Button>
+                        <Button variant={'solid'} bg='green'>CREATE NEW</Button>
                     </HashLink>
 
                 </Flex>
@@ -29,14 +30,12 @@ function Mylistings(props){
                     YOUR LISTINGS
                 </Heading>
                 <Grid mt='5' direction={'column'}>
-                    <GridItem>
-                        <ListingCard title='title' content='testi'>
-                        </ListingCard>
-                    </GridItem>
-                    <GridItem>
-                        <ListingCard title='toinen' content='testi'>
-                        </ListingCard>
-                    </GridItem>
+                    {listings.map((listing) => (
+                        <GridItem mt='2' key={listing._id}>
+                            <ListingCard id={listing._id} title={listing.title} content={listing.content}>
+                            </ListingCard>
+                        </GridItem>
+                    ))}
                 </Grid>
             </Flex>
         </>

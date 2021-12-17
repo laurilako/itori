@@ -3,10 +3,12 @@ import {
     Flex,
     Heading,
     Input,
-    InputGroup
+    InputGroup,
+    InputLeftElement,
+    Box
 } from '@chakra-ui/react'
 import Header from '../Header'
-
+import { FaSearch } from 'react-icons/fa'
 
 function Home() {
     return(
@@ -18,11 +20,12 @@ function Home() {
                 </Heading>
                 <Flex>
                     <InputGroup>
-                        {/* <InputLeftElement
+                        <Input bg='white' mt='5' variant='filled' color="black.500" placeholder='Search for listings...' />
+                        <InputLeftElement
+                        mt='5'
                         pointerEvents='none'
-                        children={<PhoneIcon color='gray.300' />}
-                        /> */}
-                        <Input mt='5' bg='white' type='text' placeholder='Search for listings...' />
+                        children={<FaSearch color='black' />}
+                        />
                     </InputGroup>
                 </Flex>
             </Flex>

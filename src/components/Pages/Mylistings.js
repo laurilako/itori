@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../Header'
 import Welcome from '../../screens/Welcome'
 import {
@@ -11,9 +11,21 @@ import {
 } from '@chakra-ui/react'
 import ListingCard from '../ListingCard'
 import { HashLink } from 'react-router-hash-link'
-import listings from '../../data/listings'
+import axios from 'axios'
 
 function Mylistings(props){
+
+    const [listings, setListings] = useState([]);
+
+    const FetchListings = async () => {
+        const { data } = await axios.get('/api/listings');
+        setListings(data);
+    }
+
+    useEffect(() => {
+        FetchListings();
+    }, []);
+
     return(
         <>
             <Header />

@@ -61,19 +61,26 @@ function Register() {
       }
     }
 
-    function validatePw(pwvalue) {
+    function validatePw(props) {
         const passwordRegex = /(?=.*[0-9])/;
         let error
-        if(!pwvalue) {
-            error = 'Password is required!'
-            return error
-        } else if (pwvalue.length < 7) {
-            error = 'Password must be 7 characters long!';
-            return error
-        } else if (!passwordRegex.test(pwvalue)) {
-            error = "Password must contain one number!";
-            return error
-          }
+        console.log(props);
+
+        // console.log(pwvalue);
+        // console.log(pwvaluec);
+        // if(!pwvalue) {
+        //     error = 'Password is required!'
+        //     return error
+        // } else if (pwvalue.length < 7) {
+        //     error = 'Password must be 7 characters long!';
+        //     return error
+        // } else if (!passwordRegex.test(pwvalue)) {
+        //     error = "Password must contain one number!";
+        //     return error
+        // } else if (!(pwvalue === pwvaluec)){
+        //     error = "Passwords does not match!";
+        //     return error
+        // }
     }
 
     return(
@@ -83,7 +90,7 @@ function Register() {
             <Container>
                 <Flex mt='5' boxShadow={'dark-lg'} flexDir={'column'} align={"center"} p='5' bg='#E59892'>
                     <Formik
-                        initialValues={{ username: '', password: ''}}
+                        initialValues={{ username: '', password: '', passwordc: ''}}
                         onSubmit={(values, actions) => {
                             setTimeout(() => {
                             handleRegister(values);
@@ -108,6 +115,15 @@ function Register() {
                                         <FormLabel htmlFor='password'>Password</FormLabel>
                                         <Input {...field} variant='solid' id='password' placeholder='password' />
                                         <FormErrorMessage>{form.errors.password}</FormErrorMessage>
+                                    </FormControl>
+                                    )}
+                                </Field>
+                                <Field name='passwordc' validate={validatePw}>
+                                    {({ field, form }) => (
+                                    <FormControl isInvalid={form.errors.passwordc && form.touched.passwordc}>
+                                        <FormLabel htmlFor='passwordc'>Confirm password</FormLabel>
+                                        <Input {...field} variant='solid' id='passwordc' placeholder='password' />
+                                        <FormErrorMessage>{form.errors.passwordc}</FormErrorMessage>
                                     </FormControl>
                                     )}
                                 </Field>

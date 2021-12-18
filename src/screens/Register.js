@@ -1,29 +1,27 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { Formik, Form, Field } from 'formik';
 import {
     Container,
     Flex,
-    Heading,
-    Stack,
-    Alert,
-    AlertIcon,
+    Text,
     Input,
     Button,
     FormControl,
     FormLabel,
     FormErrorMessage,
-    FormHelperText,
 } from '@chakra-ui/react';
 import SimpleHeader from '../components/simpleHeader';
 import TitleScreen from './TitleScreen';
-import ErrorMessage from '../components/ErrorMessage';
+import Message from '../components/Message';
 import { useNavigate } from 'react-router-dom';
 
 function Register() {
     const navigate = useNavigate();
     const [errMessage, setErrMessage] = useState("");
     const [error, setError] = useState(false);
+    const [succMessage, setSuccMessage] = useState("");
+    const [succ, setSucc] = useState(false); 
 
     const handleRegister = async (props) => {
         try {
@@ -40,47 +38,55 @@ function Register() {
                 },
                 config
             );
-        localStorage.setItem('userinfo', JSON.stringify(data));
-        // setuInfo(localStorage.getItem('userinfo'));
+            setSuccMessage("Account created! Redirecting you to Tori...");
+            setSucc(true);
+            localStorage.setItem('userinfo', JSON.stringify(data));
+            setTimeout(() => {
+                setSucc(false);
+                setSuccMessage("");
+                navigate('/home');
+                }, 5000);        
         } catch (error) {
-            console.log(error.response.data.message);
             setErrMessage(error.response.data.message);
             setError(true);
             setTimeout(() => {
                 setError(false);
                 setErrMessage("");
-                }, 5000)
+                }, 5000);
         }
     }
 
     function validateName(namevalue) {
-        let error
+        let error;
         if (!namevalue) {
-          error = 'Username is required!'
+          error = 'Username is required!';
         return error
       }
     }
 
-    function validatePw(props) {
+    function validatePw(pwvalue) {
         const passwordRegex = /(?=.*[0-9])/;
-        let error
-        console.log(props);
+        let error;
+        if(!pwvalue) {
+            error = 'Password is required!';
+            return error
+        } else if (pwvalue.length < 7) {
+            error = 'Password must be 7 characters long!';
+            return error
+        } else if (!passwordRegex.test(pwvalue)) {
+            error = "Password must contain one number!";
+            return error
+        }
+    }
 
-        // console.log(pwvalue);
-        // console.log(pwvaluec);
-        // if(!pwvalue) {
-        //     error = 'Password is required!'
-        //     return error
-        // } else if (pwvalue.length < 7) {
-        //     error = 'Password must be 7 characters long!';
-        //     return error
-        // } else if (!passwordRegex.test(pwvalue)) {
-        //     error = "Password must contain one number!";
-        //     return error
-        // } else if (!(pwvalue === pwvaluec)){
-        //     error = "Passwords does not match!";
-        //     return error
-        // }
+    function validateConfirmPw(pass, value) {
+        let error;
+        if (pass && value) {
+            if (pass !== value){
+                error = "Passwords does not match!";
+                return error
+            }
+        }
     }
 
     return(
@@ -90,7 +96,7 @@ function Register() {
             <Container>
                 <Flex mt='5' boxShadow={'dark-lg'} flexDir={'column'} align={"center"} p='5' bg='#E59892'>
                     <Formik
-                        initialValues={{ username: '', password: '', passwordc: ''}}
+                        initialValues={{ username: '', password: '', confirmPassword: ''}}
                         onSubmit={(values, actions) => {
                             setTimeout(() => {
                             handleRegister(values);
@@ -109,37 +115,49 @@ function Register() {
                                     </FormControl>
                                     )}
                                 </Field>
-                                <Field name='password' validate={validatePw}>
+                                <Field type='password' name='password' validate={validatePw} >
                                     {({ field, form }) => (
-                                    <FormControl isInvalid={form.errors.password && form.touched.password}>
+                                        <FormControl isInvalid={form.errors.password && form.touched.password}>
                                         <FormLabel htmlFor='password'>Password</FormLabel>
                                         <Input {...field} variant='solid' id='password' placeholder='password' />
                                         <FormErrorMessage>{form.errors.password}</FormErrorMessage>
                                     </FormControl>
                                     )}
                                 </Field>
-                                <Field name='passwordc' validate={validatePw}>
+                                <Field type='password' name='confirmPassword' validate={value => validateConfirmPw(props.values.password, value)}>
                                     {({ field, form }) => (
-                                    <FormControl isInvalid={form.errors.passwordc && form.touched.passwordc}>
-                                        <FormLabel htmlFor='passwordc'>Confirm password</FormLabel>
-                                        <Input {...field} variant='solid' id='passwordc' placeholder='password' />
-                                        <FormErrorMessage>{form.errors.passwordc}</FormErrorMessage>
+                                        <FormControl isInvalid={form.errors.confirmPassword && form.touched.confirmPassword}>
+                                        <FormLabel htmlFor='password'>Confirm Password</FormLabel>
+                                        <Input {...field} variant='solid' id='password' placeholder='password' />
+                                        <FormErrorMessage>{form.errors.confirmPassword}</FormErrorMessage>
                                     </FormControl>
                                     )}
                                 </Field>
-                                <Button
-                                    mt={4}
-                                    colorScheme='teal'
-                                    isLoading={props.isSubmitting}
-                                    type='submit'
-                                >
-                                    Register
-                                </Button>
+                                <Flex justify='center' flexDir={'column'} align={'center'}>
+                                    <Button
+                                        mt={4}
+                                        colorScheme='teal'
+                                        isLoading={props.isSubmitting}
+                                        type='submit'>
+                                        Register
+                                    </Button>
+                                        <Text mt='4'>Already have an account?</Text>
+                                    <Button
+                                        ml='1'
+                                        mt={4}
+                                        colorScheme='blue'
+                                        onClick={() => {
+                                            navigate('/login');
+                                        }}>
+                                        Login
+                                    </Button>
+                                </Flex>
                             </Form>
                         )}
                     </Formik>
                 </Flex>
-                {error ? (<ErrorMessage message={errMessage} />): null}
+                {error ? (<Message status='error' message={errMessage} />) : null}
+                {succ ? (<Message status='success' message={succMessage} />) : null}
             </Container>
         </>
     )

@@ -4,21 +4,17 @@ import { Formik, Form, Field } from 'formik';
 import {
     Container,
     Flex,
-    Heading,
-    Stack,
-    Alert,
-    AlertIcon,
     Input,
     Button,
+    Text,
     FormControl,
     FormLabel,
     FormErrorMessage,
-    FormHelperText,
 } from '@chakra-ui/react';
 import SimpleHeader from '../components/simpleHeader';
 import TitleScreen from './TitleScreen';
-import ErrorMessage from '../components/ErrorMessage';
 import { useNavigate } from 'react-router-dom';
+import Message from '../components/Message';
 
 
 function Login(){
@@ -26,15 +22,16 @@ function Login(){
 
     const [error, setError] = useState(false)
     const [errMessage, setErrMessage] = useState("");
+    const [succMessage, setSuccMessage] = useState("");
+    const [succ, setSucc] = useState(false); 
 
     useEffect(() => {
         const local = localStorage.getItem("userinfo");
-        console.log("local", local);
         if (local) {
             setTimeout(() => {
                 console.log("info", local);
                 navigate('/home');
-            }, 500);
+            }, 5000);
         }
     });
 
@@ -53,10 +50,16 @@ function Login(){
                 },
                 config
             );
-        localStorage.setItem('userinfo', JSON.stringify(data));
+        setSuccMessage("Succesful authentication! Redirecting you to Tori...");
+        setSucc(true);
         // setuInfo(localStorage.getItem('userinfo'));
+        localStorage.setItem('userinfo', JSON.stringify(data));
+        setTimeout(() => {
+            setSucc(false);
+            setSuccMessage("");
+            navigate('/home');
+            }, 5000);
         } catch (error) {
-            console.log(error.response.data.message);
             setErrMessage(error.response.data.message);
             setError(true);
             setTimeout(() => {
@@ -124,19 +127,31 @@ function Login(){
                                     </FormControl>
                                     )}
                                 </Field>
-                                <Button
-                                    mt={4}
-                                    colorScheme='teal'
-                                    isLoading={props.isSubmitting}
-                                    type='submit'
-                                >
-                                    Login
-                                </Button>
+                                <Flex justify='center' flexDir={'column'} align={'center'}>
+                                    <Button
+                                        mt={4}
+                                        colorScheme='teal'
+                                        isLoading={props.isSubmitting}
+                                        type='submit'>
+                                        Login
+                                    </Button>
+                                        <Text mt='4'>Haven't registered yet?</Text>
+                                    <Button
+                                        ml='1'
+                                        mt={4}
+                                        colorScheme='blue'
+                                        onClick={() => {
+                                            navigate('/register');
+                                        }}>
+                                        Register
+                                    </Button>
+                                </Flex>
                             </Form>
                         )}
                     </Formik>
                 </Flex>
-                {error ? (<ErrorMessage message={errMessage} />): null}
+                {error ? (<Message status='error' message={errMessage} />): null}
+                {succ ? (<Message status='success' message={succMessage} />): null}
             </Container>
         </>
     )

@@ -6,7 +6,7 @@ function SimpleHeader () {
         <Flex
             flexDir={['column', 'column', 'row', 'row']}
             align='center'
-            h='150px'
+            h='100px'
             p='5'
             bg='#061F4A'>
             <Flex>

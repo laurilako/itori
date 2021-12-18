@@ -7,15 +7,25 @@ import {
     MenuButton,
     MenuList,
     MenuItem,
-    Input
 } from "@chakra-ui/react";
 import { FaChevronDown } from "react-icons/fa";
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 import { HashLink } from 'react-router-hash-link';
+import { useNavigate } from 'react-router-dom';
 
 function Header() {
-    const [user, setUser] = useState(null);
-    
+    const navigate = useNavigate();
+    const [user, setUser] = useState('');
+    useEffect(() => {
+        const local = localStorage.getItem("userinfo");
+        if (!local) {
+            setTimeout(() => {
+                navigate('/login');
+            }, 500);
+        }
+        setUser(local)
+    }, [user, navigate]);
+
     return(
     <Flex
         flexDir={['column', 'column', 'row', 'row']}
@@ -46,7 +56,10 @@ function Header() {
                         Konsta
                     </MenuButton>
                     <MenuList>
-                        <MenuItem>Log out</MenuItem>
+                        <MenuItem onClick={() => {
+                            localStorage.removeItem("userinfo");
+                            setUser('');
+                        }}>Log out</MenuItem>
                     </MenuList>
                 </Menu>
             </Flex>

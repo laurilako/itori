@@ -1,23 +1,21 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
     Flex,
     Heading,
-    Text,
     Button,
-    Box,
-    IconButton,
-    SearchIcon,
     Menu,
     MenuButton,
     MenuList,
     MenuItem,
     Input
 } from "@chakra-ui/react";
-import { FaChevronDown, FaSearch } from "react-icons/fa";
+import { FaChevronDown } from "react-icons/fa";
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 import { HashLink } from 'react-router-hash-link';
 
 function Header() {
+    const [user, setUser] = useState(null);
+    
     return(
     <Flex
         flexDir={['column', 'column', 'row', 'row']}

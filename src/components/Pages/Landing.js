@@ -5,8 +5,14 @@ import SimpleHeader from '../simpleHeader';
 import TitleScreen from '../../screens/TitleScreen';
 
 function Landing(){
-
-    const [user, setUser] = useState();
+    // const [user, setUser] = useState();
+    // useEffect(() => {
+    //     const uInfo = localStorage.getItem("userinfo");
+    //     console.log(uInfo);
+    //     if (uInfo) {
+    //         navigate('/home');
+    //     }
+    // }, [navigate])
 
     return(
         <>

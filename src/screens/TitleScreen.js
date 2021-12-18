@@ -6,7 +6,7 @@ import {
 } from '@chakra-ui/react'
 
 
-function Welcome( props ){
+function TitleScreen( props ){
     return(
         <Container>
             <Flex boxShadow={'dark-lg'} flexDir={'column'} align={"center"} p='5' bg='#E59892'>
@@ -21,4 +21,4 @@ function Welcome( props ){
     )
 }
 
-export default Welcome
+export default TitleScreen

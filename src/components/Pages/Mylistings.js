@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Header from '../Header'
-import Welcome from '../../screens/Welcome'
+import TitleScreen from '../../screens/TitleScreen'
 import {
     Flex,
     Grid,
@@ -29,7 +29,7 @@ function Mylistings(props){
     return(
         <>
             <Header />
-            <Welcome title={"Hello, "} content={"Konsta"} />
+            <TitleScreen title={"Hello, "} content={"Konsta"} />
             <Flex p='2' align='center' justify='center' flexDir={'column'}>
                 <Flex p='6' >
                     <HashLink smooth to='/new'>

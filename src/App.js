@@ -3,11 +3,12 @@ import {
   ChakraProvider,
 } from '@chakra-ui/react';
 import theme from './config/theme';
-import Empty from './components/Pages/Empty';
-import Login from './components/Pages/Login'
+import Landing from './components/Pages/Landing';
+import Login from './screens/Login';
+import Register from './screens/Register';
 import Home from './components/Pages/Home';
-import Mylistings from './components/Pages/Mylistings'
-import NewListing from './components/Pages/NewListing'
+import Mylistings from './components/Pages/Mylistings';
+import NewListing from './components/Pages/NewListing';
 import { Route, Routes } from 'react-router-dom';
 
 function App() {
@@ -16,9 +17,10 @@ function App() {
       <Routes>
         <Route exact path='/home' element={<Home />} />
         <Route exact path='/login' element={<Login />} />
+        <Route exact path='/register' element={<Register />} />
         <Route exact path='/listings' element={<Mylistings />} />
         <Route exact path='/new' element={<NewListing />} />
-        <Route exact path='/' element={<Empty />} />
+        <Route exact path='/' element={<Landing />} />
       </Routes>
     </ChakraProvider>
   );

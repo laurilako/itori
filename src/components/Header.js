@@ -16,16 +16,17 @@ import { useNavigate } from 'react-router-dom';
 function Header() {
     const navigate = useNavigate();
     const [user, setUser] = useState('');
+    const [update, setUpdate] = useState(false);
     useEffect(() => {
-        const local = localStorage.getItem("userinfo");
+        const local = JSON.parse(localStorage.getItem("userinfo"));
         if (!local) {
             setTimeout(() => {
                 navigate('/login');
             }, 500);
         }
         setUser(local)
-    }, [user, navigate]);
-
+    }, [navigate, update]);
+    console.log(user);
     return(
     <Flex
         flexDir={['column', 'column', 'row', 'row']}
@@ -52,13 +53,13 @@ function Header() {
             <Flex ml='2'>
                 <Menu>
                     <MenuButton as={Button} rightIcon={<FaChevronDown />}>
-                        {/* Logged in user here */}
-                        Konsta
+                        {user ? (user.name) : ""}
                     </MenuButton>
                     <MenuList>
                         <MenuItem onClick={() => {
                             localStorage.removeItem("userinfo");
                             setUser('');
+                            setUpdate(true);
                         }}>Log out</MenuItem>
                     </MenuList>
                 </Menu>

@@ -119,7 +119,7 @@ function Register() {
                                     {({ field, form }) => (
                                         <FormControl isInvalid={form.errors.password && form.touched.password}>
                                         <FormLabel htmlFor='password'>Password</FormLabel>
-                                        <Input {...field} variant='solid' id='password' placeholder='password' />
+                                        <Input {...field} type='password' variant='solid' id='confirmpassword' placeholder='password' />
                                         <FormErrorMessage>{form.errors.password}</FormErrorMessage>
                                     </FormControl>
                                     )}
@@ -128,7 +128,7 @@ function Register() {
                                     {({ field, form }) => (
                                         <FormControl isInvalid={form.errors.confirmPassword && form.touched.confirmPassword}>
                                         <FormLabel htmlFor='password'>Confirm Password</FormLabel>
-                                        <Input {...field} variant='solid' id='password' placeholder='password' />
+                                        <Input {...field} type='password' variant='solid' id='password' placeholder='password' />
                                         <FormErrorMessage>{form.errors.confirmPassword}</FormErrorMessage>
                                     </FormControl>
                                     )}

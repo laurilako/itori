@@ -3,6 +3,7 @@ import {
     Container,
     Flex,
     Heading,
+    Text
 } from '@chakra-ui/react'
 
 
@@ -13,9 +14,9 @@ function TitleScreen( props ){
                 <Heading>
                     {props.title}
                 </Heading>
-                <Heading>
+                <Text mt='5'>
                     {props.content}
-                </Heading>
+                </Text>
             </Flex>
         </Container>
     )

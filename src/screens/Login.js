@@ -122,7 +122,7 @@ function Login(){
                                     {({ field, form }) => (
                                     <FormControl isInvalid={form.errors.password && form.touched.password}>
                                         <FormLabel htmlFor='password'>Password</FormLabel>
-                                        <Input {...field} variant='solid' id='password' placeholder='password' />
+                                        <Input {...field} type='password' variant='solid' id='password' placeholder='password' />
                                         <FormErrorMessage>{form.errors.password}</FormErrorMessage>
                                     </FormControl>
                                     )}

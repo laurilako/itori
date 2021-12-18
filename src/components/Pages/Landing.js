@@ -1,29 +1,30 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { Button, ButtonGroup, Flex, Container, Text } from '@chakra-ui/react';
 import { HashLink } from 'react-router-hash-link';
 import SimpleHeader from '../simpleHeader';
 import TitleScreen from '../../screens/TitleScreen';
+import { useNavigate } from 'react-router-dom';
 
 function Landing(){
-    // const [user, setUser] = useState();
-    // useEffect(() => {
-    //     const uInfo = localStorage.getItem("userinfo");
-    //     console.log(uInfo);
-    //     if (uInfo) {
-    //         navigate('/home');
-    //     }
-    // }, [navigate])
+    let navigate = useNavigate();
+
+    useEffect(() => {
+        const uInfo = localStorage.getItem("userinfo");
+        if (uInfo) {
+            navigate('/home');
+        }
+    }, [navigate])
 
     return(
         <>
             <SimpleHeader />
-            <TitleScreen title='NOT LOGGED IN' />
+            <TitleScreen title='NOT LOGGED IN..' content='Please proceed to either login or sign up!'/>
             <Container mt='5'>
             <Flex boxShadow={'dark-lg'} flexDir={'column'} align={"center"} p='5' bg='#E59892'>
                     <Flex alignItems={'center'}>
                         <ButtonGroup>
                             <HashLink smooth to="/login">
-                                <Button variant='solid'>
+                                <Button colorScheme='blue' variant='solid'>
                                     LOGIN
                                 </Button>
                             </HashLink>
@@ -31,8 +32,8 @@ function Landing(){
                                 
                             </Text>
                             <HashLink smooth to="/register">
-                                <Button variant='solid'>
-                                    CREATE ACCOUNT
+                                <Button colorScheme='green' variant='solid'>
+                                    SIGN UP
                                 </Button>
                             </HashLink>  
                         </ButtonGroup>

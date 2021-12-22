@@ -5,7 +5,6 @@ import {
     Flex,
     Grid,
     Heading,
-    Spacer,
     GridItem,
     Button
 } from '@chakra-ui/react'
@@ -14,22 +13,28 @@ import { HashLink } from 'react-router-hash-link'
 import axios from 'axios'
 
 function Mylistings(props){
-
     const [listings, setListings] = useState([]);
+    const [user, setUser] = useState({});
 
-    const FetchListings = async () => {
+    useEffect(() => {
+        getListings();
+        getUser();
+    }, [])
+
+    const getUser = () => {
+        const local = JSON.parse(localStorage.getItem("userinfo"));
+        setUser(local);
+    }
+
+    const getListings = async () => {
         const { data } = await axios.get('/api/listings');
         setListings(data);
     }
 
-    useEffect(() => {
-        FetchListings();
-    }, []);
-
     return(
         <>
             <Header />
-            <TitleScreen title={"Hello, "} content={"Konsta"} />
+            <TitleScreen title={"Hello, "} content={user.name} />
             <Flex p='2' align='center' justify='center' flexDir={'column'}>
                 <Flex p='6' >
                     <HashLink smooth to='/new'>
@@ -43,9 +48,13 @@ function Mylistings(props){
                 </Heading>
                 <Grid mt='5' direction={'column'}>
                     {listings.map((listing) => (
-                        <GridItem mt='2' key={listing._id}>
-                            <ListingCard id={listing._id} title={listing.title} content={listing.content}>
-                            </ListingCard>
+                        <GridItem mt='2' key={listing.id}>
+                            {(listing.user.id === user._id ? 
+                                (<ListingCard user={user} id={listing.id} title={listing.title} content={listing.content}>
+                                </ListingCard>)
+                                :
+                                null
+                            )}
                         </GridItem>
                     ))}
                 </Grid>

@@ -1,7 +1,9 @@
 import React from 'react'
 
 function Listing(){
-
+    return(
+        null
+    )
 }
 
-return Listing
+export default Listing

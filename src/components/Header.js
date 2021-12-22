@@ -26,7 +26,6 @@ function Header() {
         }
         setUser(local)
     }, [navigate, update]);
-    console.log(user);
     return(
     <Flex
         flexDir={['column', 'column', 'row', 'row']}

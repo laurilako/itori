@@ -3,7 +3,7 @@ import Header from '../Header'
 import TitleScreen from '../../screens/TitleScreen'
 import {
     Flex,
-    Grid,
+    SimpleGrid,
     Heading,
     GridItem,
     Button
@@ -42,22 +42,23 @@ function Mylistings(props){
                     </HashLink>
 
                 </Flex>
-
                 <Heading>
                     YOUR LISTINGS
                 </Heading>
-                <Grid mt='5' direction={'column'}>
+                <Flex>
+                <SimpleGrid mt='5' columns={{ base: 1, xl: 3, lg: 2, md: 2 }}>
                     {listings.map((listing) => (
-                        <GridItem mt='2' key={listing.id}>
+                        <GridItem p='2' key={listing.id}>
                             {(listing.user.id === user._id ? 
-                                (<ListingCard user={user} id={listing.id} title={listing.title} content={listing.content}>
+                                (<ListingCard pic={listing.pic} user={user} id={listing.id} title={listing.title} content={listing.content}>
                                 </ListingCard>)
                                 :
                                 null
                             )}
                         </GridItem>
                     ))}
-                </Grid>
+                </SimpleGrid>
+                </Flex>
             </Flex>
         </>
     )

@@ -25,8 +25,6 @@ function Home() {
         const { data } = await axios.get('/api/listings');
         setListings(data);
     }
-
-    console.log(currUser);
     return(
         <>
             <Header />
@@ -49,7 +47,7 @@ function Home() {
                 <SimpleGrid mt='5' columns={{ base: 1, xl: 3, lg: 2, md: 2 }}>
                     {listings.map((listing) => (
                         <GridItem p='2' key={listing.id}>
-                            <ListingCard user={currUser} owner={listing.user.name} id={listing.id} title={listing.title} content={listing.content}>
+                            <ListingCard pic={listing.pic} user={currUser} owner={listing.user.name} id={listing.id} title={listing.title} content={listing.content}>
                             </ListingCard>
                         </GridItem>
                     ))}

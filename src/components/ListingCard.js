@@ -1,5 +1,5 @@
 import React from 'react'
-import { Flex, Box, Heading, Text, IconButton, Button
+import { Flex, Box, Heading, Text, IconButton, Image
 } from '@chakra-ui/react'
 import { FaTrash, FaEdit } from 'react-icons/fa'
 
@@ -9,13 +9,17 @@ function ListingCard(props) {
         if(window.confirm(`Delete listing id: ${id}?`)){
         }
     };
+    console.log(props);
     return(
         <Box bg='#E59892' borderWidth="1px" borderRadius="lg" overflow="hidden">
             <Box m="5" as="a" href="/listing/:id">
                 {(props.owner ? (<Heading ml='4' as='h5' size='xs'>Posted by {props.owner}</Heading>) : null)}
-                <Heading m="5" mb="0" as="h4" size="md">{props.title}</Heading>
-                <Text m="5" mt="0">{props.content}</Text>
+                <Heading m="5" as="h4" size="md">{props.title}</Heading>
+                <Text m="5" mt='-2'>{props.content}</Text>
             </Box>
+            <Flex justify='center'>
+                <Image objectFit='cover' boxSize={'150px'} src={props.pic}></Image>
+            </Flex>
                 {(props.user.listings.includes(props.id) ?
                     (
                     <Flex p='3'>

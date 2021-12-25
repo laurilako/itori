@@ -7,6 +7,7 @@ import {
     MenuButton,
     MenuList,
     MenuItem,
+    ButtonGroup,
 } from "@chakra-ui/react";
 import { FaChevronDown } from "react-icons/fa";
 import { ColorModeSwitcher } from './ColorModeSwitcher';
@@ -17,6 +18,7 @@ function Header() {
     const navigate = useNavigate();
     const [user, setUser] = useState('');
     const [update, setUpdate] = useState(false);
+
     useEffect(() => {
         const local = JSON.parse(localStorage.getItem("userinfo"));
         if (!local) {
@@ -40,14 +42,21 @@ function Header() {
                 </Heading>
             </HashLink>
         </Flex>
-        <Flex align='center' justify='flex-end' w='100%'>
+        <Flex flexDir={['column', 'column', 'row', 'row']} align='center' justify='flex-end' w='100%'>
         {/* User info to here */}
             <Flex>
-                <HashLink smooth to="/listings">
-                    <Button>
-                        My listings
-                    </Button>
-                </HashLink>
+                <ButtonGroup>
+                    <HashLink smooth to='/home'>
+                        <Button>
+                            Home
+                        </Button>
+                    </HashLink>
+                    <HashLink smooth to="/listings">
+                        <Button>
+                            My listings
+                        </Button>
+                    </HashLink>
+                </ButtonGroup>
             </Flex>
             <Flex ml='2'>
                 <Menu>
@@ -61,9 +70,9 @@ function Header() {
                             setUpdate(true);
                         }}>Log out</MenuItem>
                     </MenuList>
+                    <ColorModeSwitcher />
                 </Menu>
             </Flex>
-            <ColorModeSwitcher />
         </Flex>
     </Flex>
     )

@@ -14,7 +14,7 @@ import axios from 'axios'
 
 function Mylistings(props){
     const [listings, setListings] = useState([]);
-    const [user, setUser] = useState({});
+    const [user, setUser] = useState('');
 
     useEffect(() => {
         getListings();
@@ -34,7 +34,7 @@ function Mylistings(props){
     return(
         <>
             <Header />
-            <TitleScreen title={"Hello, "} content={user.name} />
+            <TitleScreen title={"Hello, "} content={"you can view, create new, edit or remove your listings"} />
             <Flex p='2' align='center' justify='center' flexDir={'column'}>
                 <Flex p='6' >
                     <HashLink smooth to='/new'>
@@ -50,7 +50,7 @@ function Mylistings(props){
                     {listings.map((listing) => (
                         <GridItem p='2' key={listing.id}>
                             {(listing.user.id === user._id ? 
-                                (<ListingCard pic={listing.pic} user={user} id={listing.id} title={listing.title} content={listing.content}>
+                                (<ListingCard nothome={true} pic={listing.pic} user={user} id={listing.id} title={listing.title} content={listing.content}>
                                 </ListingCard>)
                                 :
                                 null

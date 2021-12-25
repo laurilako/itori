@@ -5,21 +5,30 @@ import {
     Input,
     InputGroup,
     InputLeftElement,
-    Grid,
     GridItem,
-    SimpleGrid
+    SimpleGrid,
+    Button,
+    Text
 } from '@chakra-ui/react'
 import ListingCard from '../ListingCard'
 import axios from 'axios'
 import Header from '../Header'
 import { FaSearch } from 'react-icons/fa'
+import { HashLink } from 'react-router-hash-link'
 
 function Home() {
     const [listings, setListings] = useState([])
-    const currUser = JSON.parse(localStorage.getItem("userinfo"));
+    const [currUser, setcurrUser] = useState('')
+
     useEffect(() => {
+        getUser();
         getListings();
     }, [])
+
+    const getUser = () => {
+        const local = JSON.parse(localStorage.getItem("userinfo"));
+        setcurrUser(local);
+    }
 
     const getListings = async () => {
         const { data } = await axios.get('/api/listings');
@@ -32,6 +41,9 @@ function Home() {
                 <Heading color='black' as='h2'>
                     Welcome to TORI!
                 </Heading>
+                <Text>
+                    You create new or edit your posts from "My listings" page
+                </Text>
                 <Flex>
                     <InputGroup>
                         <Input bg='white' mt='5' variant='filled' color="black.500" placeholder='Search for listings...' />
@@ -42,12 +54,17 @@ function Home() {
                         />
                     </InputGroup>
                 </Flex>
+                <Flex mt='5'>
+                    <HashLink smooth to='/new'>
+                            <Button variant={'solid'} bg='green'>CREATE NEW</Button>
+                    </HashLink>
+                </Flex>
             </Flex>
             <Flex justify={'center'}>
                 <SimpleGrid mt='5' columns={{ base: 1, xl: 3, lg: 2, md: 2 }}>
                     {listings.map((listing) => (
                         <GridItem p='2' key={listing.id}>
-                            <ListingCard pic={listing.pic} user={currUser} owner={listing.user.name} id={listing.id} title={listing.title} content={listing.content}>
+                            <ListingCard nothome={false} pic={listing.pic} user={currUser} owner={listing.user.name} id={listing.id} title={listing.title} content={listing.content}>
                             </ListingCard>
                         </GridItem>
                     ))}

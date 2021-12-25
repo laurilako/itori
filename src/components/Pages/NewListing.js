@@ -21,8 +21,7 @@ function NewListing(props){
     const [error, setError] = useState(false);
     const [succMessage, setSuccMessage] = useState("");
     const [succ, setSucc] = useState(false); 
-    const [file, setFile] = useState('');
-    const [picurl, setPicurl] = useState('');
+    const [file, setFile] = useState();
     const [user, setUser] = useState({});
 
     useEffect(() => {
@@ -34,75 +33,71 @@ function NewListing(props){
         setUser(local);
     }
 
-    const handleImage = (e) => {
-        setFile(e.target.files[0]);
-    }
-
-    const uploadImage = () => {
-        const fd = new FormData();        
-        const url = `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_CLOUDNAME}/upload`
-        const xhr = new XMLHttpRequest();
-
+    const upload = async (props) => {
+        let fd = new FormData();
+        let url = `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_CLOUDNAME}/upload`
         fd.append(
             "upload_preset",
             process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET);
         fd.append("tags", "browser_upload");
         fd.append("file", file);
-        xhr.open("POST", url, true);
-        xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
-        console.log("FD", fd);
-        xhr.send(fd);
 
-        xhr.onreadystatechange = (e) => {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                const response = JSON.parse(xhr.responseText);
-                console.log("res-sec-url", response.url);
-                setPicurl(response.url)
-            }
-        }
-    }
+        axios
+            .post(url, fd)
+            .then((result) => {
+                try {
+                    const config = {
+                        headers: {
+                            "Content-type": "application/json"
+                        }
+                    };
+                    axios.post(
+                        "/api/listings/",
+                        {
+                            title: props.title,
+                            content: props.content,
+                            pic: result.data.url,
+                            userId: user._id
+                        },
+                        config
+                    )
+                    .then(async () => {
+                        const { data } = await axios.get(
+                            `/api/users/${user._id}`
+                        )
+                        localStorage.setItem('userinfo', JSON.stringify(data));
+                    })
 
-    const handleCreate = async (props) => {
-        uploadImage();
-        try {
-            const config = {
-                headers: {
-                    "Content-type": "application/json"
+                    setSuccMessage("Post created! Redirecting you to Tori...");
+                    setSucc(true);
+                    setTimeout(() => {
+                        setSucc(false);
+                        setSuccMessage("");
+                        navigate('/home');
+                        }, 5000);    
+                } catch (error) {
+                    setErrMessage(error.response.data.message);
+                    setError(true);
+                    setTimeout(() => {
+                        setError(false);
+                        setErrMessage("");
+                        navigate('/home');
+                        }, 5000);                    
                 }
-            };
-            console.log(picurl);
-            const { data } = await axios.post(
-                "/api/listings/",
-                {
-                    title: props.title,
-                    content: props.content,
-                    pic: picurl,
-                    userId: user._id
-                },
-                config
-            );
-            setSuccMessage("Post created! Redirecting you to Tori...");
-            setSucc(true);
-            setTimeout(() => {
-                setSucc(false);
-                setSuccMessage("");
-                navigate('/home');
-                }, 5000);        
-        } catch (error) {
-            setErrMessage(error.response.data.message);
-            setError(true);
-            setTimeout(() => {
-                setError(false);
-                setErrMessage("");
-                }, 5000);
-        }
+            })
+            .catch((err) => {
+                console.log(err)
+            })
     }
-    
+
     function validateTitle(value) {
         let error;
         if (!value) {
             error = 'Title is required!';
           return error
+        } else if (value.length < 3){
+            error = "Title must be over 3 characters!"
+            return error
         }
     }
 
@@ -124,8 +119,7 @@ function NewListing(props){
                         initialValues={{ title: '', content: ''}}
                         onSubmit={(values, actions) => {
                             setTimeout(() => {
-                            console.log("values", values);
-                            handleCreate(values);
+                            upload(values);
                             actions.setSubmitting(false)
                             }, 1000)
                         }}
@@ -151,7 +145,8 @@ function NewListing(props){
                                     )}
                                 </Field>
                                 <Flex mt='4'>
-                                    <Input type='file' accept={'image/*'} onChange={handleImage} />
+                                    <Input type='file' accept={'image/*'} onChange={(e) => {setFile(e.target.files[0])
+                                    }} />
                                 </Flex>
                                 <Flex justify='center' flexDir={'column'} align={'center'}>
                                     <Button

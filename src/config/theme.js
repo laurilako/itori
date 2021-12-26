@@ -45,6 +45,9 @@ const components = {
       }),
     },
   },
+  Input: {
+    
+  }
 };
 
 const theme = extendTheme({

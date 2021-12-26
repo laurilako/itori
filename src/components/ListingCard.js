@@ -19,13 +19,13 @@ function ListingCard(props) {
     }
 
     return(
-        <Box size='lg' bg='#E59892' borderWidth="1px" borderRadius="lg" overflow="hidden">
-            <Box m="5">
-                {(props.owner ? (<Heading ml='4' as='h5' size='xs'>Posted by {props.owner}</Heading>) : null)}
-                <Flex flexDir={'column'}>
+        <Box maxWidth='400px' boxShadow={'lg'} bg='#E59892' borderWidth="2px" borderColor={'blackAlpha.400'} borderRadius="lg" overflow="hidden">
+            <Box textAlign={'right'} m="5">
+                {(props.owner ? (<Heading as='h5' size='xs'>by {props.owner}</Heading>) : null)}
+                <Flex align='center' justify='center' flexDir={'column'}>
                     <Heading m="5" as="h4" size="md">{props.title}</Heading>
-                    <Text ml='5' mt='-2'>{props.content}</Text>
-                    <Image display='block' mx='auto' width={'50%'} src={props.pic}></Image>
+                    <Text mt='-2'>{props.content}</Text>
+                    <Image mt='2' display='block' mx='auto' width={'50%'} src={props.pic}></Image>
                 </Flex>
             </Box>
             <Flex>

@@ -86,7 +86,12 @@ function NewListing(props){
                 }
             })
             .catch((err) => {
-                console.log(err)
+                setErrMessage("Picture file error, please select valid picture for your post!");
+                setError(true);
+                setTimeout(() => {
+                    setError(false);
+                    setErrMessage("");
+                }, 5000)
             })
     }
 
@@ -144,7 +149,8 @@ function NewListing(props){
                                     </FormControl>
                                     )}
                                 </Field>
-                                <Flex mt='4'>
+                                <Flex flexDir={'column'} mt='1'>
+                                    <FormLabel htmlFor='picture'>Picture</FormLabel>
                                     <Input type='file' accept={'image/*'} onChange={(e) => {setFile(e.target.files[0])
                                     }} />
                                 </Flex>

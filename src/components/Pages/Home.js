@@ -2,9 +2,6 @@ import React, { useState, useEffect } from 'react'
 import {
     Flex,
     Heading,
-    Input,
-    InputGroup,
-    InputLeftElement,
     GridItem,
     SimpleGrid,
     Button,
@@ -13,7 +10,7 @@ import {
 import ListingCard from '../ListingCard'
 import axios from 'axios'
 import Header from '../Header'
-import { FaSearch } from 'react-icons/fa'
+// import { FaSearch } from 'react-icons/fa'
 import { HashLink } from 'react-router-hash-link'
 
 function Home() {
@@ -39,12 +36,12 @@ function Home() {
             <Header />
             <Flex boxShadow={'dark-lg'} flexDir={'column'} align={"center"} p='50' w='100%' bg='#E59892'>
                 <Heading color='black' as='h2'>
-                    Welcome to TORI!
+                    Welcome to Tori!
                 </Heading>
                 <Text>
-                    You create new or edit your posts from "My listings" page
+                    Here you can see all posts. You create new or edit your posts from "My listings" page.
                 </Text>
-                <Flex>
+                {/* <Flex>
                     <InputGroup>
                         <Input bg='white' mt='5' variant='filled' color="black.500" placeholder='Search for listings...' />
                         <InputLeftElement
@@ -53,7 +50,7 @@ function Home() {
                         children={<FaSearch color='black' />}
                         />
                     </InputGroup>
-                </Flex>
+                </Flex> */}
                 <Flex mt='5'>
                     <HashLink smooth to='/new'>
                             <Button variant={'solid'} bg='green'>CREATE NEW</Button>

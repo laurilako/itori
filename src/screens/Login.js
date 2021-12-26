@@ -29,7 +29,6 @@ function Login(){
         const local = localStorage.getItem("userinfo");
         if (local) {
             setTimeout(() => {
-                console.log("info", local);
                 navigate('/home');
             }, 5000);
         }

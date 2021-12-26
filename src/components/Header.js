@@ -8,6 +8,7 @@ import {
     MenuList,
     MenuItem,
     IconButton,
+    Text,
     ButtonGroup,
 } from "@chakra-ui/react";
 import { FaChevronDown, FaBars } from "react-icons/fa";
@@ -32,6 +33,7 @@ function Header() {
     }, [navigate, update]);
     return(
         <>
+        <Headroom>
             <Flex
                 display={['none', 'none', 'flex', 'flex']}
                 flexDir={'row'}
@@ -78,6 +80,7 @@ function Header() {
                     </Flex>
                 </Flex>
             </Flex>
+            </Headroom>
                                 
             <Headroom> 
             <Flex
@@ -110,6 +113,7 @@ function Header() {
                                     </MenuItem>
                                 </MenuList>
                     </Menu>
+                    <Text ml='2' mt='2' color={'white'}> {user ? (`logged in as ${user.name}`) : ""}  </Text>
                 </Flex>
                 <HashLink mt='2' smooth to="/home">
                     <Heading mt='2' color='#E59892'>

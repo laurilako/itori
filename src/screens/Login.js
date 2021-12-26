@@ -52,6 +52,7 @@ function Login(){
         setSuccMessage("Succesful authentication! Redirecting you to Tori...");
         setSucc(true);
         // setuInfo(localStorage.getItem('userinfo'));
+        localStorage.clear();
         localStorage.setItem('userinfo', JSON.stringify(data));
         setTimeout(() => {
             setSucc(false);

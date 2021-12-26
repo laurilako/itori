@@ -46,14 +46,13 @@ function Mylistings(props){
                     YOUR LISTINGS
                 </Heading>
                 <Flex>
-                <SimpleGrid mt='5' columns={{ base: 1, xl: 3, lg: 2, md: 2 }}>
+                <SimpleGrid mt='5' columns={{ base: 1, xl: 3, lg: 2, md: 5 }}>
                     {listings.map((listing) => (
                         <GridItem p='2' key={listing.id}>
                             {(listing.user.id === user._id ? 
                                 (<ListingCard nothome={true} pic={listing.pic} user={user} id={listing.id} title={listing.title} content={listing.content}>
                                 </ListingCard>)
-                                :
-                                null
+                                : null
                             )}
                         </GridItem>
                     ))}

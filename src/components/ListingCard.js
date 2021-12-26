@@ -11,7 +11,7 @@ function ListingCard(props) {
 
     const deleteHandler = async (id) => {
         if(window.confirm(`Delete listing id: ${id}?`)){
-            const res =  await axios.delete(`api/listings/${id}`)
+            const res =  await axios.delete(`api/listings/${id}`, { data: { data: props.user._id } })
             if(res.status === 204){
                 navigate('/home')
             }

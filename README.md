@@ -1,4 +1,4 @@
-Marketplace, where you can sell your images.
+Place, where you can post, edit or delete your images with title and some details.
 Making this for learning purposes and as a full stack project.
 Developmenting during free time / when I have spare time.
 Backend in separate repository, private for now.

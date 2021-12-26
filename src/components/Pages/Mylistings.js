@@ -34,7 +34,7 @@ function Mylistings(props){
     return(
         <>
             <Header />
-            <TitleScreen title={"Hello, "} content={"you can view, create new, edit or remove your listings"} />
+            <TitleScreen title={""} content={"you can view, create new, edit or remove your listings"} />
             <Flex p='2' align='center' justify='center' flexDir={'column'}>
                 <Flex p='6' >
                     <HashLink smooth to='/new'>

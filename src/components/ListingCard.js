@@ -20,7 +20,7 @@ function ListingCard(props) {
 
     return(
         <Box size='lg' bg='#E59892' borderWidth="1px" borderRadius="lg" overflow="hidden">
-            <Box m="5" as="a" href="/listing/:id">
+            <Box m="5">
                 {(props.owner ? (<Heading ml='4' as='h5' size='xs'>Posted by {props.owner}</Heading>) : null)}
                 <Flex flexDir={'column'}>
                     <Heading m="5" as="h4" size="md">{props.title}</Heading>
@@ -32,7 +32,7 @@ function ListingCard(props) {
                 {(props.user.listings.includes(props.id) && props.nothome ?
                     (
                     <Flex p='3'>
-                    <IconButton href={`/listing/${props.id}`} variant='ghost' icon={<FaEdit />}></IconButton>
+                    <IconButton as='a' href={`/listing/${props.id}`} variant='ghost' icon={<FaEdit />}></IconButton>
                     <IconButton as='button' onClick={()=>deleteHandler(props.id)} variant='ghost' icon={<FaTrash />}></IconButton>
                     </Flex>) : null)}
             </Flex>

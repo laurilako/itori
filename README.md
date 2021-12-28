@@ -3,6 +3,9 @@ Making this for learning purposes and as a full stack project.
 Developmenting during free time / when I have spare time.
 Backend in separate repository: https://github.com/laurilako/itori-backend
 
+Test application live: https://stark-meadow-54802.herokuapp.com/
+(Application is not 100% bug free! 😅)
+
 Stack I've planned to use: MongoDB, Express, ReactJS, NodeJS. (aka MERN)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

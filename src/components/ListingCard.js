@@ -32,7 +32,7 @@ function ListingCard(props) {
                 {(props.user.listings.includes(props.id) && props.nothome ?
                     (
                     <Flex p='3'>
-                    <IconButton as='a' href={`/listing/${props.id}`} variant='ghost' icon={<FaEdit />}></IconButton>
+                    <IconButton as='a' href={`/listings/${props.id}`} variant='ghost' icon={<FaEdit />}></IconButton>
                     <IconButton as='button' onClick={()=>deleteHandler(props.id)} variant='ghost' icon={<FaTrash />}></IconButton>
                     </Flex>) : null)}
             </Flex>

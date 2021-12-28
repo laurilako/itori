@@ -9,9 +9,13 @@ import { useNavigate } from 'react-router-dom'
 function ListingCard(props) {
     const navigate = useNavigate();
 
+    const editHandler = (id) => {
+        navigate(`/listing/${id}`)
+    }
+
     const deleteHandler = async (id) => {
         if(window.confirm(`Delete listing id: ${id}?`)){
-            const res =  await axios.delete(`api/listings/${id}`, { data: { data: props.user._id } })
+            const res =  await axios.delete(`/api/listings/${id}`, { data: { data: props.user._id } })
             if(res.status === 204){
                 navigate('/home')
             }
@@ -32,7 +36,7 @@ function ListingCard(props) {
                 {(props.user.listings.includes(props.id) && props.nothome ?
                     (
                     <Flex p='3'>
-                    <IconButton as='a' href={`/listings/${props.id}`} variant='ghost' icon={<FaEdit />}></IconButton>
+                    <IconButton as='button' onClick={()=>editHandler(props.id)} variant='ghost' icon={<FaEdit />}></IconButton>
                     <IconButton as='button' onClick={()=>deleteHandler(props.id)} variant='ghost' icon={<FaTrash />}></IconButton>
                     </Flex>) : null)}
             </Flex>

@@ -25,7 +25,7 @@ function App() {
     setListings(data);
   }
 
-  const matchBId = useMatch('/listings/:id')
+  const matchBId = useMatch('/listing/:id')
   const listingdata = matchBId
     ? listings.find((o) => o.id === matchBId.params.id)
     : null
@@ -37,7 +37,7 @@ function App() {
         <Route exact path='/login' element={<Login />} />
         <Route exact path='/register' element={<Register />} />
         <Route exact path='/listings' element={<Mylistings />} />
-        <Route exact path='/listings/:id' element={<SingleListing data={listingdata} />} />
+        <Route exact path='/listing/:id' element={<SingleListing data={listingdata} />} />
         <Route exact path='/new' element={<NewListing />} />
         <Route exact path='/' element={<Landing />} />
       </Routes>

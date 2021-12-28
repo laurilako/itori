@@ -57,7 +57,7 @@ function Header() {
                                     Home
                                 </Button>
                             </HashLink>
-                            <HashLink smooth to="/listings">
+                            <HashLink smooth to="/mylistings">
                                 <Button>
                                     My listings
                                 </Button>

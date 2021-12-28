@@ -12,10 +12,9 @@ import { Formik, Form, Field } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Message from '../../components/Message';
-import Header from '../Header'
 import TitleScreen from '../../screens/TitleScreen'
 
-function SingleListing(data) {
+function SingleListing(props) {
     const navigate = useNavigate();
     const [errMessage, setErrMessage] = useState("");
     const [error, setError] = useState(false);
@@ -28,14 +27,11 @@ function SingleListing(data) {
     })
 
     function setID() {
-        if(data.data){
-            setPostId(data.data.id)
+        if(props.id){
+            setPostId(props.id)
         }
     }
 
-    if(!postId){
-        return null
-    }
     const update = async (props) => {
         try {
             const config = {
@@ -90,7 +86,6 @@ function SingleListing(data) {
 
     return(
         <>
-            <Header />
             <TitleScreen title={"Update listing"} />
             <Container>
                 <Flex mt='5' boxShadow={'dark-lg'} flexDir={'column'} align={"center"} p='5' bg='#E59892'>
@@ -130,6 +125,13 @@ function SingleListing(data) {
                                         isLoading={props.isSubmitting}
                                         type='submit'>
                                         Update
+                                    </Button>
+                                    <Button
+                                        as='a'
+                                        href='/mylistings'
+                                        mt={4}
+                                        colorScheme='orange'>
+                                        Cancel
                                     </Button>
                                 </Flex>
                             </Form>

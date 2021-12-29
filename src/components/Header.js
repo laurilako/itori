@@ -101,7 +101,7 @@ function Header() {
                                         </HashLink>
                                     </MenuItem>
                                     <MenuItem>
-                                        <HashLink smooth to="/listings">
+                                        <HashLink smooth to="/mylistings">
                                             My listings
                                         </HashLink>
                                     </MenuItem>

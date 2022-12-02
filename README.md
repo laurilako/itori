@@ -3,9 +3,6 @@ Making this for learning purposes and as a full stack project.
 Creating during free time / when I have spare time.
 Backend in separate repository: https://github.com/laurilako/itori-backend
 
-Test application live: https://stark-meadow-54802.herokuapp.com/
-(Application is not 100% bug free! 😅)
-
 Stack I've planned to use: MongoDB, Express, ReactJS, NodeJS. (aka MERN)
 
 ## Dev blog 2.1.2022:
@@ -32,14 +29,6 @@ One of the harder things to implement was this: How can I create working Image a
 Mostly because it had free plan, good documentation to implement with React. I only had to add the url from the uploaded picture to its listing and database.
 
 More detailed info from developing this project you can get by checking commit history (Commits should have somewhat accurate info about the commit).
-
-When I was finalizing these core functionalities to the front-end, I thought I should think of some negative things I can myself see as a not-so-experienced full stack dev.
-  - State controlling is a bit messy and I seriously should've thought using Redux or implement it now.
-  - Code is also a bit messy in some parts.
-  - I should've added comments about what I did and WHY on the hardest parts.
-
-Overall I think this was great project to do in learning purposes, and I had great help from different documentations and course materials of courses I've done.
-And, in the end, It works as intended. Might look clumsy and have some of the negative things I listed above, but these all can be fixed. =)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
